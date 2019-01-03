@@ -71,9 +71,11 @@ def model_forward(X, params):
 
 def getCost(AL, Y):
     m = Y.shape[1]
-    # compare final output with Y using Log Reg cost function
-    cost = (-1 / m) * np.sum(np.multiply(Y, np.log(AL)) + np.multiply(1 - Y, np.log(1 - AL)))
-    cost = np.squeeze(cost)
+    # compare final output with Y using Log Classification cost function
+    cost_log = (-1 / m) * np.sum(np.multiply(Y, np.log(AL)) + np.multiply(1 - Y, np.log(1 - AL)))
+    # compare using MSE regression cost function
+    mse = (np.square(AL - Y)).mean()
+    cost = np.squeeze(mse)
 
     assert(cost.shape ==())
 
