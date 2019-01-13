@@ -1,4 +1,5 @@
-# plain vanilla neural network from zero
-This repo is for experimenting and testing neural nets made from scratch. 
-You can always change the cost functions and neural architecture of the network to vary. 
-However the code base still only uses "plain vanilla" you could also implement CNN, RNN or even NEAT.
+# Plain vanilla neural network from zero
+
+This repo is for experimenting and testing neural nets made from scratch.
+
+You can change the cost functions and neural architecture of the network wether you want to do regression or classification tasks. 
