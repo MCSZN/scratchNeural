@@ -23,7 +23,6 @@ def model(X, Y, layers_dims, learning_rate=0.001, num_iterations=10000, print_co
 
         if print_cost and i % 100 == 0:
             print ("Cost after iteration %i: %f" % (i, cost))
-        if print_cost and i % 100 == 0:
             costs.append(cost)
             
     
