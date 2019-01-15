@@ -7,13 +7,23 @@ mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 
 
-def model(X, Y, layers_dims, learning_rate=0.001, num_iterations=10000, print_cost=False):
+def plot_it(costs, learning_rate):
+    plt.plot(np.squeeze(costs))
+    plt.ylabel('cost')
+    plt.xlabel('iterations (per tens)')
+    plt.title("Learning rate =" + str(learning_rate))
+    plt.show()
+
+def model(X, Y, layers_dims, learning_rate=0.001, num_iterations=10000, print_cost=False, RESNET = False):
     costs = []
 
     parameters = init_params(layers_dims)
     
     for i in range(0, num_iterations):
-        AL, caches = model_forward(X, parameters)
+        if RESNET:
+            AL, caches = res_model_forward(X, parameters)
+        else:
+            AL, caches = model_forward(X, parameters)
         
         cost = getCost(AL, Y)
         
@@ -24,12 +34,7 @@ def model(X, Y, layers_dims, learning_rate=0.001, num_iterations=10000, print_co
         if print_cost and i % 100 == 0:
             print ("Cost after iteration %i: %f" % (i, cost))
             costs.append(cost)
-            
     
-    plt.plot(np.squeeze(costs))
-    plt.ylabel('cost')
-    plt.xlabel('iterations (per tens)')
-    plt.title("Learning rate =" + str(learning_rate))
-    plt.show()
+    plot_it(costs, learning_rate)
     
     return parameters
