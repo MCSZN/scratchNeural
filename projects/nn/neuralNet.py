@@ -69,6 +69,40 @@ def model_forward(X, params):
 
     return AL, caches
 
+
+def res_forward(A,W,b):
+    # uses relu and resnet technique
+    short_cut = A
+    
+    Z = np.dot(W,A) + b
+    linear_cache = (A, W, b)
+    A, activation_cache =  relu(Z) + np.dot(W, short_cut)
+
+    cache = (linear_cache, activation_cache)
+    return A, cache
+
+def res_model_forward(X, params):
+    caches = []
+    A = X
+    # number of layers in neural net
+    L = len(params)//2
+    # on each layer use relu than tanh
+    for l in range(1, L):
+        A_prev = A
+
+        A, cache = res_forward(A_prev, params['W' + str(l)], params['b' + str(l)])
+
+        caches.append(cache)
+
+    AL, cache = activation_forward(A, params['W' + str(L)],
+                        params['b' + str(L)], activation ="sigmoid")
+
+    caches.append(cache)
+
+    assert(AL.shape == (1, X.shape[1]))
+
+    return AL, caches
+
 def getCost(AL, Y):
     m = Y.shape[1]
     # compare final output with Y using Log Classification cost function
