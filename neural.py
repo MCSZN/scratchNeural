@@ -1,9 +1,11 @@
 import functional as F
 import numpy as np
 import matplotlib as mpl
+
 mpl.use("TkAgg")
 import matplotlib.pyplot as plt
 from typing import Iterable, List, Dict, Tuple, Callable
+
 
 class Model(object):
     def __init__(
@@ -89,7 +91,8 @@ class Model(object):
         return X, caches
 
     def _layer_backward(
-        self, X, cache: Tuple[np.ndarray], activation: str) -> Tuple[np.ndarray]:
+        self, X, cache: Tuple[np.ndarray], activation: str
+    ) -> Tuple[np.ndarray]:
         linear_cache, activation_cache = cache
         if activation == "relu":
             dZ = F.relu_back(X, activation_cache)
@@ -108,7 +111,7 @@ class Model(object):
         # compute derivative of last layer
         dOut = -(np.divide(y, out) - np.divide(1 - y, 1 - out))
         # set current cache
-        current_cache = caches[L-1]
+        current_cache = caches[L - 1]
         # get gradients of last activation layer
         (
             grads["dA" + str(L)],
@@ -117,32 +120,33 @@ class Model(object):
         ) = self._layer_backward(dOut, current_cache, self.activations[-1])
 
         # get grads for all other layers
-        for l, activ in zip(range(L-1)[::-1], self.activations):
+        for l, activ in zip(range(L - 1)[::-1], self.activations):
             current_cache = caches[l]
             dA_prev_temp, dW_temp, db_temp = self._layer_backward(
-                grads["dA" + str(l+2)], current_cache, activ
+                grads["dA" + str(l + 2)], current_cache, activ
             )
-            grads["dA" + str(l+1)] = dA_prev_temp
-            grads["dW" + str(l+1)] = dW_temp
-            grads["db" + str(l+1)] = db_temp
+            grads["dA" + str(l + 1)] = dA_prev_temp
+            grads["dW" + str(l + 1)] = dW_temp
+            grads["db" + str(l + 1)] = db_temp
 
         return grads
 
-    def loss(self, out: np.ndarray, y:np.ndarray):
+    def loss(self, out: np.ndarray, y: np.ndarray):
         return np.square(out - y).mean()
 
     def __call__(self, X):
         return self.forward(X)
 
 
-def fit(model: Model, X:np.ndarray, y:np.ndarray) -> List[float]:
+def fit(model: Model, X: np.ndarray, y: np.ndarray) -> List[float]:
     cost = []
     for _ in range(model.epochs):
         out, cache = model.forward(X)
         cost.append(model.loss(out, y))
-        grads =  model.backward(out, y, cache)
+        grads = model.backward(out, y, cache)
         model.update_params(grads)
     return cost
+
 
 def plot_loss(loss: np.ndarray) -> None:
     plt.plot(np.squeeze(loss))
@@ -150,16 +154,19 @@ def plot_loss(loss: np.ndarray) -> None:
     plt.xlabel("Epoch")
     plt.show()
 
+
 if __name__ == "__main__":
     from sklearn.datasets import load_boston
 
     X, y = load_boston(return_X_y=True)
-    y = (y-y.mean()) / y.std()
+    y = (y - y.mean()) / y.std()
 
     classifier = Model(
         layers_dims=[16, 8, 1],
-        activations=['relu', 'relu', 'tanh'],
-        lr=0.01, epochs=500, input_shape=X.shape
+        activations=["relu", "relu", "tanh"],
+        lr=0.01,
+        epochs=500,
+        input_shape=X.shape,
     )
 
     losses = fit(classifier, X, y)

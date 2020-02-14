@@ -4,6 +4,7 @@ from numba import jitclass, boolean, float64, njit
 import warnings
 import functional as F
 
+
 class LinearReg(object):
     def __init__(self, grad: bool = False):
         self.grad = grad
@@ -35,11 +36,6 @@ class LinearReg(object):
         u = (((y - y_pred) ** 2)).sum()
         v = ((y - y.mean()) ** 2).sum()
         return 1 - (u / v)
-
-
-
-
-
 
 
 l = LinearReg(grad=False)

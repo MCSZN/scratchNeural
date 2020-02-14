@@ -3,11 +3,13 @@ from numba import njit
 
 arr = np.ndarray
 
+
 @njit
 def sigmoid(Z):
     A = 1 / (1 + np.exp(-Z))
     cache = Z
     return A, cache
+
 
 @njit
 def relu(Z):
@@ -16,12 +18,14 @@ def relu(Z):
     cache = Z
     return A, cache
 
+
 @njit
 def tanh(Z):
     A = np.tanh(Z)
     cache = Z
     assert A.shape == Z.shape
     return A, cache
+
 
 @njit
 def relu_back(dA, cache):
@@ -31,12 +35,14 @@ def relu_back(dA, cache):
     assert dZ.shape == Z.T.shape
     return dZ
 
+
 @njit
 def sigmoid_back(dA, cache):
     Z = cache
     s = 1 / (1 + np.exp(-Z))
     dZ = dA * s * (1 - s)
     return dZ
+
 
 @njit
 def tanh_back(dA, cache):
@@ -46,11 +52,13 @@ def tanh_back(dA, cache):
     assert dZ.shape == Z.shape
     return dZ
 
+
 @njit
 def linear(X, W, b):
     Z = np.dot(X, W) + b
     cache = (X, W, b)
     return Z, cache
+
 
 @njit
 def linear_back(dZ, cache):
