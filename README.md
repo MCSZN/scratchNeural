@@ -1,9 +1,5 @@
-# Plain vanilla neural network from zero
+# A repo for models that should not exist
 
-This repo is for experimenting and testing neural nets made from scratch.
+This repo is for simple models I replicate from scratch using numerical tools.
 
-You can change the cost functions and neural architecture of the network whether you want to do regression or classification tasks. 
-
-You can also choose whether you want the network to be a ResNet or a regular fully connected network.
-
-Goal is to develop various versions for different languages.
+Models from this repo are of absolutly no use and do not represent tools I work with on a day to day basis
