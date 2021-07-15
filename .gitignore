@@ -1,0 +1,6 @@
+.vscode
+bin/
+asm/
+venv/
+*__pycache__*
+*.mypy_cache*
