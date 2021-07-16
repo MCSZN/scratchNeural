@@ -4,17 +4,24 @@
 #include <stdio.h>
 #include <neuron.h>
 
-bnn_data_t read_csv(void) {
-    FILE* csv = open("data/xor.csv", 'r');
-    bool inputs[1000][2];
-    bool labels[1000];
-    bnn_data_t data; 
-    fclose(csv);
+bnn_data_t* read_csv(void) {
+    FILE* csv = fopen("data/xor.csv", "r");
+    bnn_data_t* data;
+    shape_t shape = {
+        .n_features = 2,
+        .n_samples = 1000,
+    };
+    data->shape = shape;
+    data->input = inputs;
+    data->output = labels;
+    fclose(csv); 
     return data;
 }
 
 int main() {
     srand(time(NULL));
     bnn_data_t data = read_csv();
+    printf("bnn_data shape %li %li\n", data.shape.n_features, data.shape.n_samples);
+    printf("bnn_data %i\n", data.input[100]);
     return 0;
 }

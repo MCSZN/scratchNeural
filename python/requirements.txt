@@ -1,5 +1,0 @@
-numpy
-wheel
-black
-mypy
-pylint

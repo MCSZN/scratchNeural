@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <neuron.h>
+#include <math.h>
 
 uint16_t dot_product(const bool* a, const bool* b, const size_t length) {
     // dot product for regular one dimensional arrays

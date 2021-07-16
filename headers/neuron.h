@@ -41,7 +41,7 @@ typedef struct shape_t {
 } shape_t;
 
 typedef struct bnn_data_t {
-    bool** input;
-    bool* output; 
+    bool input[1000][2];
+    bool output[1000]; 
     shape_t shape;
 } bnn_data_t;
