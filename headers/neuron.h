@@ -35,13 +35,10 @@ typedef struct bnn_train_config_t {
     bool verbose;
 } bnn_train_config_t;
 
-typedef struct shape_t {
-    size_t n_features;
-    size_t n_samples;
-} shape_t;
 
 typedef struct bnn_data_t {
-    bool input[1000][2];
-    bool output[1000]; 
-    shape_t shape;
+    bool* data;
+    bool* labels; 
+    size_t n_samples;
+    size_t n_features;
 } bnn_data_t;

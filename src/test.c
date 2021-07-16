@@ -7,10 +7,6 @@
 bnn_data_t* read_csv(void) {
     FILE* csv = fopen("data/xor.csv", "r");
     bnn_data_t* data;
-    shape_t shape = {
-        .n_features = 2,
-        .n_samples = 1000,
-    };
     data->shape = shape;
     data->input = inputs;
     data->output = labels;
