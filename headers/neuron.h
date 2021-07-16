@@ -37,8 +37,11 @@ typedef struct bnn_train_config_t {
 
 
 typedef struct bnn_data_t {
-    bool* data;
+    bool** data;
     bool* labels; 
     size_t n_samples;
     size_t n_features;
 } bnn_data_t;
+
+bnn_data_t* init_bnn_data(size_t n_samples, size_t n_features);
+void deinit_bnn_data(bnn_data_t* data);
