@@ -1,5 +1,6 @@
-#ifndef ACTIVATIONS_H
-#define ACTIVATIONS_H
+#include <stdbool.h>
+
+#pragma once
 
 typedef enum activation_t {
     RELU,
@@ -7,7 +8,4 @@ typedef enum activation_t {
     TANH
 } activation_t;
 
-float sigmoid(float input);
-float relu(float input);
-
-#endif
+bool sigmoid(uint16_t input, size_t len);
