@@ -1,8 +1,7 @@
-#include <stdint.h>
-#include <stdbool.h>
+#include <numbers.h>
 
 #pragma once
 
-uint8_t rand_uint8();
+u8 rand_u8();
 bool rand_bool();
-float rand_float();
+float rand_f32();

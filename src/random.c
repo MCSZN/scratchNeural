@@ -1,12 +1,11 @@
 #include <math.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
+#include <numbers.h>
 
 
-uint8_t rand_uint8() {
+u8 rand_u8() {
     // return random u8
-    return (uint8_t)(rand() % 255);
+    return (u8)(rand() % 255);
 }
 
 bool rand_bool() {
@@ -15,6 +14,6 @@ bool rand_bool() {
     return true;
 }
 
-float rand_float() {
-    return (float)(rand() / RAND_MAX);
+float rand_f32() {
+    return (f32)(rand() / RAND_MAX);
 }
