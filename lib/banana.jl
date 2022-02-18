@@ -46,4 +46,4 @@ function accuracy(predictions::Vector{Bool}, ground_truth::Vector{Bool})::Float6
     return (tp + tn) / length(predictions)
 end
 
-function loss()
+function loss() end
