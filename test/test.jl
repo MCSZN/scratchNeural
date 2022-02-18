@@ -7,6 +7,8 @@ function gen_xor_data()
     return x, y
 end
 
+# TODO: move scoring to banana lib
+# modularize model/prediction to be able to pass various architectures
 
 function main()
     ws = [init_weights(2, [2, 3, 1]) for _ in 1:10]
