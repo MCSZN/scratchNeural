@@ -7,30 +7,31 @@ function gen_xor_data()
     return x, y
 end
 
-# TODO: move scoring to banana lib
+# TODO:
 # modularize model/prediction to be able to pass various architectures
+# implement gradient descent using flux, find appropriate loss function
+# surely have to create some container for both binary weights and float weights (used for back prop)
 
 function main()
-    ws = [init_weights(2, [2, 3, 1]) for _ in 1:10]
+    ws = [init_weights(2, [2, 3, 1]) for _ in 1:100]
     xor_model_weights::Vector{BitArray}=[] 
     epoch = 1
     while true
         x, y = gen_xor_data()
         γs = predict(x, ws)
-        println(γs)
         if [y] in γs
             println("found right combination! epoch: $epoch")
             w = ws[findfirst(isequal(y), map(x -> x[1], γs))]
-            println(w)
+            println("weights found: ", w)
             xor_model_weights = w
             break
         end
-        ws = [init_weights(2, [2, 3, 1]) for _ in 1:10]
+        ws = [init_weights(2, [2, 3, 1]) for _ in 1:100]
         epoch += 1
     end
 
-    predictions = []
-    ground_truth = []
+    predictions::Vector{Bool}= []
+    ground_truth::Vector{Bool}= []
     for _ in 1:10
         x, y = gen_xor_data()
         γ = model(x, xor_model_weights)[1]
@@ -38,10 +39,7 @@ function main()
         push!(predictions, γ)
     end
 
-    tp = length([i == j for (i, j) in zip(predictions, ground_truth) if i == true])
-    tn = length([i == j for (i, j) in zip(predictions, ground_truth) if i == false])
-
-    println("mean accuracy = $((tp + tn) / length(predictions))")
+    println("acc: $(accuracy(predictions, ground_truth))")
 end
 
 main()
