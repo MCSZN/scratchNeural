@@ -13,7 +13,7 @@ end
 #   implement gradient descent using flux, find appropriate loss function
 # second: surely have to create some container for both binary weights and float weights (used for back prop)
 # last: modularize model/prediction to be able to pass various architectures
-function score_model(weights::Vector{BitArray})::Float64
+function score_model(weights::FullyConnectedWeights)::Float64
     predictions::Vector{Bool}= []
     ground_truth::Vector{Bool}= []
     for _ in 1:10
@@ -29,7 +29,7 @@ end
 
 function main()
     ws = [init_weights(2, [2, 3, 1]) for _ in 1:2]
-    xor_model_weights::Vector{BitArray}=[]
+    xor_model_weights::FullyConnectedWeights=[]
     epoch = 1
     while true
         x, y = gen_xor_data()
